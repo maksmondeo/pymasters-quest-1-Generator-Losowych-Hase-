@@ -1,3 +1,4 @@
+import contextlib
 from secrets import choice
 from string import ascii_letters, digits, punctuation
 
@@ -14,9 +15,19 @@ def password(length: int, include_digits: bool, include_punctuation: bool) -> st
 
 
 def main() -> None:
-    length = int(input("\nPodaj długość hasła (liczbę znaków): "))
-    include_digits = str(input("\nCzy hasło ma zawierać cyfry? (t/n): "))
-    include_punctuation = str(input("\nCzy hasło ma zawierać znaki specjalne? (t/n): "))
+    length = input("\nPodaj długość hasła (liczbę znaków): ")
+
+    while type(length) is not int or length <= 0:
+        length = input(
+            "\nNieprawidłowa wartość!\n\nPodaj długość hasła (liczbę znaków): "
+        )
+        with contextlib.suppress(ValueError):
+            length = int(length)
+
+    include_digits = str(input("\nCzy hasło ma zawierać cyfry? (t/n): ")).lower()
+    include_punctuation = str(
+        input("\nCzy hasło ma zawierać znaki specjalne? (t/n): ")
+    ).lower()
 
     include_digits = include_digits == "t"
     include_punctuation = include_punctuation == "t"
