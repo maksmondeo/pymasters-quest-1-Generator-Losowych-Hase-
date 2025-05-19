@@ -1,0 +1,1 @@
+# pymasters-quest-1-Generator-Losowych-Hase-
