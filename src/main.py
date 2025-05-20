@@ -46,7 +46,9 @@ def easy_password() -> str:
     )
 
 
-def hard_password(length: int, include_digits: bool, include_punctuation: bool) -> str:
+def hard_password(
+    password_length: int, include_digits: bool, include_punctuation: bool
+) -> str:
     char_pool = ascii_letters
 
     if include_digits:
@@ -54,7 +56,7 @@ def hard_password(length: int, include_digits: bool, include_punctuation: bool) 
     if include_punctuation:
         char_pool += punctuation
 
-    return "".join(choice(char_pool) for _ in range(length))
+    return "".join(choice(char_pool) for _ in range(password_length))
 
 
 def main() -> None:
@@ -77,15 +79,15 @@ def main() -> None:
             break
 
     if password_type == 1:
-        length = ""
+        password_length = ""
 
         while True:
-            length = input("\nPodaj długość hasła (liczbę znaków): ")
+            password_length = input("\nPodaj długość hasła (liczbę znaków): ")
 
             with contextlib.suppress(ValueError):
-                length = int(length)
+                password_length = int(password_length)
 
-            if not isinstance(length, int) and length <= 0:
+            if not isinstance(password_length, int) and password_length <= 0:
                 print("\nNieprawidłowa wartość! Spróbuj ponownie.\n")
             else:
                 break
@@ -100,7 +102,7 @@ def main() -> None:
 
         print(
             "\nWygenerowane hasło: "
-            + hard_password(length, include_digits, include_punctuation)
+            + hard_password(password_length, include_digits, include_punctuation)
         )
     else:
         print("\nWygenerowane hasło: " + easy_password())
