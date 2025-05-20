@@ -20,14 +20,14 @@ Prosty konsolowy generator haseł w Pythonie, działający z linii poleceń. Umo
 1. Zainstaluj Poetry (jeśli jeszcze nie masz):
 
    ```bash
-   curl -sSL https://install.python-poetry.org | python3 -
+   pip install poetry
    ```
 
 2. Sklonuj repozytorium:
 
    ```bash
-   git clone https://github.com/twoj-login/generator-hasel.git
-   cd generator-hasel
+   git clone https://github.com/maksmondeo/pymasters-quest-1-Generator-Losowych-Hase-.git
+   cd pymasters-quest-1-Generator-Losowych-Hase-
    ```
 
 3. Zainstaluj zależności
@@ -38,5 +38,5 @@ Prosty konsolowy generator haseł w Pythonie, działający z linii poleceń. Umo
 
 4. Uruchomienie
    ```bash
-   poetry run python generator_hasel/main.py
+   poetry run python src/main.py
    ```
