@@ -2,8 +2,51 @@ import contextlib
 from secrets import choice
 from string import ascii_letters, digits, punctuation
 
+password_words = [
+    "jabłko",
+    "banan",
+    "gruszka",
+    "pomarańcza",
+    "mandarynka",
+    "winogrono",
+    "truskawka",
+    "malina",
+    "borówka",
+    "czarna porzeczka",
+    "brzoskwinia",
+    "nektarynka",
+    "śliwka",
+    "wiśnia",
+    "czereśnia",
+    "ananas",
+    "mango",
+    "kiwi",
+    "grejpfrut",
+    "limonka",
+    "cytryna",
+    "granat",
+    "figa",
+    "daktyl",
+    "awokado",
+    "kokos",
+    "liczi",
+    "papaja",
+    "marakuja",
+    "arbuz",
+]
 
-def password(length: int, include_digits: bool, include_punctuation: bool) -> str:
+
+def easy_password() -> str:
+    return (
+        "".join(choice(password_words))
+        + "-"
+        + "".join(choice(digits) for _ in range(5))
+        + "-"
+        + "".join(choice(password_words))
+    )
+
+
+def hard_password(length: int, include_digits: bool, include_punctuation: bool) -> str:
     char_pool = ascii_letters
 
     if include_digits:
@@ -15,26 +58,52 @@ def password(length: int, include_digits: bool, include_punctuation: bool) -> st
 
 
 def main() -> None:
-    length = input("\nPodaj długość hasła (liczbę znaków): ")
+    password_type = ""
 
-    while type(length) is not int or length <= 0:
-        length = input(
-            "\nNieprawidłowa wartość!\n\nPodaj długość hasła (liczbę znaków): "
+    while True:
+        password_type = input(
+            "\nJaki typ hasła chcesz wygenerować?\n"
+            "1. Standardowe hasło (losowy ciąg znaków)\n"
+            "2. Hasło łatwe do zapamiętania (format: słowo-liczba-słowo)\n\n"
+            "Wybierz opcję (1/2): "
         )
+
         with contextlib.suppress(ValueError):
-            length = int(length)
+            password_type = int(password_type)
 
-    include_digits = str(input("\nCzy hasło ma zawierać cyfry? (t/n): ")).lower()
-    include_punctuation = str(
-        input("\nCzy hasło ma zawierać znaki specjalne? (t/n): ")
-    ).lower()
+        if not isinstance(password_type, int) or password_type not in [1, 2]:
+            print("\nNieprawidłowa wartość! Spróbuj ponownie.")
+        else:
+            break
 
-    include_digits = include_digits == "t"
-    include_punctuation = include_punctuation == "t"
+    if password_type == 1:
+        length = ""
 
-    print(
-        "\nWygenerowane hasło: " + password(length, include_digits, include_punctuation)
-    )
+        while True:
+            length = input("\nPodaj długość hasła (liczbę znaków): ")
+
+            with contextlib.suppress(ValueError):
+                length = int(length)
+
+            if not isinstance(length, int) and length <= 0:
+                print("\nNieprawidłowa wartość! Spróbuj ponownie.\n")
+            else:
+                break
+
+        include_digits = str(input("\nCzy hasło ma zawierać cyfry? (t/n): ")).lower()
+        include_punctuation = str(
+            input("\nCzy hasło ma zawierać znaki specjalne? (t/n): ")
+        ).lower()
+
+        include_digits = include_digits == "t"
+        include_punctuation = include_punctuation == "t"
+
+        print(
+            "\nWygenerowane hasło: "
+            + hard_password(length, include_digits, include_punctuation)
+        )
+    else:
+        print("\nWygenerowane hasło: " + easy_password())
 
     new_passoword = ""
     while new_passoword not in ["n", "t"]:
