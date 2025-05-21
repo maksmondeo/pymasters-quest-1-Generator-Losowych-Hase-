@@ -107,12 +107,12 @@ def main() -> None:
     else:
         print("\nWygenerowane hasło: " + easy_password())
 
-    new_passoword = ""
-    while new_passoword not in ["n", "t"]:
-        new_passoword = input("\nCzy chcesz wygenerować nowe hasło? (t/n): ")
-        if new_passoword == "t":
+    new_password = ""
+    while new_password not in ["n", "t"]:
+        new_password = input("\nCzy chcesz wygenerować nowe hasło? (t/n): ")
+        if new_password == "t":  # noqa: S105
             main()
-        elif new_passoword == "n":
+        elif new_password == "n":  # noqa: S105
             print("\nDziękuję za skorzystanie z Generatora Haseł!")
         else:
             print("\nNieprawidłowa odpowiedź.")
