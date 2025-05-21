@@ -118,5 +118,6 @@ def main() -> None:
             print("\nNieprawidłowa odpowiedź.")
 
 
-print("Witaj! Ten program pomoże Ci wygenerować bezpieczne, losowe hasło.")
-main()
+if __name__ == "__main__":
+    print("Witaj! Ten program pomoże Ci wygenerować bezpieczne, losowe hasło.")
+    main()
